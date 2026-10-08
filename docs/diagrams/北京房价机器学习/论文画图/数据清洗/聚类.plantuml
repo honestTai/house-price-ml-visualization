@@ -1,0 +1,62 @@
+@startuml
+
+title K-Means聚类分析时序图
+
+actor User
+
+
+User -> loadDataset: 调用loadDataset函数
+activate loadDataset
+
+loadDataset -> pd: 读取ershoufang-clean-utf8-v1.1.csv文件
+activate pd
+
+pd --> loadDataset: 返回DataFrame对象
+deactivate pd
+
+loadDataset -> pd: 读取latlng.csv文件
+activate pd
+
+pd --> loadDataset: 返回DataFrame对象
+deactivate pd
+
+loadDataset -> pd: 合并经纬度数据
+activate pd
+
+pd --> loadDataset: 返回合并后的DataFrame对象
+deactivate pd
+
+loadDataset -> pd: 选择所需数据和处理空值
+activate pd
+
+pd --> loadDataset: 返回处理后的DataFrame对象
+deactivate pd
+
+loadDataset -> np: 转换为numpy数组
+activate np
+
+np --> loadDataset: 返回numpy数组
+deactivate np
+
+User -> plt: 绘制不同k值下的SSE折线图
+activate plt
+
+plt --> User: 显示图表
+deactivate plt
+
+User -> KMeansClassifier: 初始化KMeansClassifier
+activate KMeansClassifier
+
+User -> KMeansClassifier: 设置k值
+activate KMeansClassifier
+
+User -> KMeansClassifier: 调用fit方法
+activate KMeansClassifier
+
+KMeansClassifier -> KMeansClassifier: 运行K-Means算法
+activate KMeansClassifier
+
+KMeansClassifier --> User: 返回聚类结果
+deactivate KMeansClassifier
+
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+
+!define INITIALIZATION_BEGIN
+!define INITIALIZATION_END
+!define LIFECYCLE_BEGIN
+!define LIFECYCLE_END
+
+participant SpiderMain
+participant UrlManager
+participant MyLog
+participant HtmlDownloader
+participant HtmlParser
+participant HtmlOutputer
+
+INITIALIZATION_BEGIN
+SpiderMain -> UrlManager: 初始化
+SpiderMain -> MyLog: 初始化
+SpiderMain -> HtmlDownloader: 初始化
+SpiderMain -> HtmlParser: 初始化
+SpiderMain -> HtmlOutputer: 初始化
+INITIALIZATION_END
+
+SpiderMain -> UrlManager: 添加初始URL
+
+LIFECYCLE_BEGIN
+loop 爬取页面链接
+    SpiderMain -> UrlManager: 获取待爬取URL
+    UrlManager -> SpiderMain: 待爬取URL
+    SpiderMain -> HtmlDownloader: 下载页面
+    HtmlDownloader -> SpiderMain: 下载结果
+    SpiderMain -> HtmlParser: 解析页面
+    HtmlParser -> SpiderMain: 解析结果
+    SpiderMain -> UrlManager: 添加新链接
+end
+
+loop 爬取二手房信息
+    SpiderMain -> UrlManager: 获取待爬取URL
+    UrlManager -> SpiderMain: 待爬取URL
+    SpiderMain -> HtmlDownloader: 下载页面
+    HtmlDownloader -> SpiderMain: 下载结果
+    SpiderMain -> HtmlParser: 解析页面
+    HtmlParser -> SpiderMain: 解析结果
+    SpiderMain -> HtmlOutputer: 输出数据
+end
+LIFECYCLE_END
+
+@enduml

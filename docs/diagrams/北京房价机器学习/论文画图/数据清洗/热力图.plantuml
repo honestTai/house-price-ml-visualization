@@ -1,0 +1,29 @@
+@startuml
+
+!define INITIALIZATION_BEGIN
+!define INITIALIZATION_END
+!define DATA_PROCESSING_BEGIN
+!define DATA_PROCESSING_END
+
+participant BaiduMapAPI
+participant DataFrame
+participant CSVReader
+participant CSVWriter
+
+INITIALIZATION_BEGIN
+BaiduMapAPI -> BaiduMapAPI: 初始化
+BaiduMapAPI -> CSVWriter: 创建经纬度csv
+INITIALIZATION_END
+
+BaiduMapAPI -> CSVWriter: 写入经纬度信息
+
+CSVReader -> DataFrame: 读取二手房数据
+DataFrame -> DataFrame: 数据清理和整理
+
+DATA_PROCESSING_BEGIN
+DataFrame -> DataFrame: 合并经纬度信息
+DataFrame -> DataFrame: 根据条件筛选数据
+DataFrame -> CSVWriter: 写入 star.txt
+DATA_PROCESSING_END
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+start
+:打开链家网;
+:选择北京地址;
+:确定目标数据;
+while (遍历区域和页面URL) is (有更多URL?)
+  :下载页面内容;
+  :解析页面提取详情链接;
+  while (遍历详情链接) is (有更多详情页面?)
+    :下载详情页面;
+    :解析页面获取二手房信息;
+    :输出数据至csv文件;
+    if (被反爬虫机制封锁?) then (是)
+      :暂停一段时间;
+    else (否)
+      :继续爬取;
+    endif
+  endwhile
+endwhile
+stop
+@enduml

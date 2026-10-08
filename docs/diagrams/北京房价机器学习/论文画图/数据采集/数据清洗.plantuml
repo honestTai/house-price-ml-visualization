@@ -1,0 +1,28 @@
+@startuml
+
+!define INITIALIZATION_BEGIN
+!define INITIALIZATION_END
+!define DATA_CLEANING_BEGIN
+!define DATA_CLEANING_END
+
+participant CSVReader
+participant CSVWriter
+participant DataCleaningLogic
+
+INITIALIZATION_BEGIN
+CSVReader -> CSVReader: 打开 ershoufang-mini-utf8.csv
+CSVWriter -> CSVWriter: 创建 ershoufang-mini-utf8.txt
+INITIALIZATION_END
+
+CSVReader -> DataCleaningLogic: 读取CSV数据
+DataCleaningLogic -> DataCleaningLogic: 清理数据
+
+DATA_CLEANING_BEGIN
+loop 对每行数据进行清理
+    DataCleaningLogic -> DataCleaningLogic: 数据项清理
+end
+DATA_CLEANING_END
+
+CSVWriter -> CSVWriter: 写入清理后的数据
+
+@enduml

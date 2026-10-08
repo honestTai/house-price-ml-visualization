@@ -1,0 +1,26 @@
+@startuml
+
+!define INITIALIZATION_BEGIN
+!define INITIALIZATION_END
+!define DATA_PROCESSING_BEGIN
+!define DATA_PROCESSING_END
+
+participant DataReader
+participant WordCloudConfig
+participant WordCloudLibrary
+
+INITIALIZATION_BEGIN
+DataReader -> DataReader: 读取二手房数据文件
+INITIALIZATION_END
+
+WordCloudConfig -> WordCloudConfig: 配置基础参数
+WordCloudConfig -> WordCloudLibrary: 创建WordCloud对象
+
+DATA_PROCESSING_BEGIN
+WordCloudLibrary -> WordCloudLibrary: 分词处理
+WordCloudLibrary -> WordCloudLibrary: 设置词云格式
+WordCloudLibrary -> WordCloudLibrary: 生成词云
+WordCloudLibrary -> WordCloudLibrary: 保存词云图
+DATA_PROCESSING_END
+
+@enduml

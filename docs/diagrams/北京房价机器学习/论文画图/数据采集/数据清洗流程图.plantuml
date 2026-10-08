@@ -1,0 +1,14 @@
+@startuml
+start
+:打开 ershoufang-mini-utf8.csv;
+:读取每行数据;
+while (是否还有数据行?) is (是)
+  :清理每个数据项;
+  :对数据项进行对齐;
+  :整数化总价数据项;
+  :去除单价数据项单位;
+  :去除建筑面积和套内面积单位;
+  :将清理后的数据写入 ershoufang-mini-utf8.txt;
+endwhile
+stop
+@enduml
